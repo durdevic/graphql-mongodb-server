@@ -40,15 +40,15 @@ export default {
             err ? reject(err) : resolve(res);
           });
         });
-        createdPost = transformPost(result);
-        const creator = await User.findById(post.author);
+        // createdPost = transformPost(result);
+        const author = await User.findById(post.author);
 
-        if (!creator) {
+        if (!author) {
           throw new Error("User not found.");
         }
-        creator.posts.push(newPost);
-        await creator.save();
-        return createdPost;
+        author.posts.push(newPost);
+        await author.save();
+        return result;
       } catch (error) {
         console.log(error);
         throw error;
